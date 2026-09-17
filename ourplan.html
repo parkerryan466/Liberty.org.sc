@@ -1,0 +1,1075 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Our Plan | Liberty</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --lime: #b8ff00;
+      --lime-dark: #8fca00;
+      --black: #080808;
+      --dark: #111111;
+      --grey: #666;
+      --light: #f5f6f3;
+      --white: #ffffff;
+      --border: #e5e5e5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      background: var(--black);
+      color: white;
+      padding: 9px 5%;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      border-bottom: 1px solid var(--border);
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo-mark {
+      width: 43px;
+      height: 43px;
+      background: var(--lime);
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: 900;
+      border-radius: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--lime-dark);
+    }
+
+    .nav-button {
+      background: var(--black);
+      color: white;
+      padding: 12px 19px;
+      border-radius: 3px;
+    }
+
+    .nav-button:hover {
+      background: var(--lime);
+      color: var(--black) !important;
+    }
+
+    /* HERO */
+
+    .hero {
+      background: var(--black);
+      color: white;
+      padding: 110px 8% 115px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: var(--lime);
+      right: -170px;
+      top: -170px;
+      opacity: 0.95;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      color: var(--lime);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 8vw, 105px);
+      line-height: 0.95;
+      letter-spacing: -5px;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #d5d5d5;
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    /* INTRO */
+
+    .intro {
+      padding: 90px 8%;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intro h2 {
+      font-size: 42px;
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .intro p {
+      color: var(--grey);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    /* POLICY SECTION */
+
+    .policy-section {
+      padding: 100px 8%;
+      background: var(--light);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 55px;
+      gap: 30px;
+    }
+
+    .section-heading h2 {
+      font-size: 48px;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .section-heading p {
+      max-width: 480px;
+      color: var(--grey);
+    }
+
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .policy-card {
+      background: white;
+      padding: 38px;
+      min-height: 290px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: 0.25s ease;
+    }
+
+    .policy-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--lime);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+    }
+
+    .policy-number {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--lime-dark);
+      margin-bottom: 30px;
+    }
+
+    .policy-card h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      letter-spacing: -1px;
+    }
+
+    .policy-card p {
+      color: var(--grey);
+      font-size: 15px;
+      max-width: 600px;
+    }
+
+    .policy-link {
+      display: inline-block;
+      margin-top: 25px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--lime);
+      padding-bottom: 4px;
+    }
+
+    /* FEATURED POLICY */
+
+    .featured {
+      padding: 100px 8%;
+      background: white;
+    }
+
+    .featured-box {
+      background: var(--black);
+      color: white;
+      padding: 65px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-box::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border: 45px solid var(--lime);
+      border-radius: 50%;
+      right: -100px;
+      bottom: -120px;
+    }
+
+    .featured-label {
+      color: var(--lime);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .featured h2 {
+      font-size: 50px;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    .featured p {
+      color: #ccc;
+      max-width: 650px;
+    }
+
+    .featured-list {
+      position: relative;
+      z-index: 2;
+    }
+
+    .featured-item {
+      padding: 17px 0;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .featured-item strong {
+      font-size: 15px;
+    }
+
+    .featured-item span {
+      color: var(--lime);
+      font-weight: 900;
+    }
+
+    /* POLICY DETAILS */
+
+    .details {
+      padding: 100px 8%;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .detail-card {
+      border-top: 5px solid var(--lime);
+      padding: 30px;
+      background: var(--light);
+    }
+
+    .detail-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .detail-card p {
+      color: var(--grey);
+      font-size: 14px;
+    }
+
+    /* CTA */
+
+    .cta {
+      background: var(--lime);
+      padding: 85px 8%;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 55px;
+      letter-spacing: -3px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 30px;
+      color: #242424;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--black);
+      color: white;
+      padding: 15px 25px;
+      font-weight: 800;
+      border-radius: 3px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: var(--black);
+      color: white;
+      padding: 70px 8% 30px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 50px;
+      padding-bottom: 60px;
+    }
+
+    .footer-brand h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .footer-brand p {
+      color: #999;
+      max-width: 330px;
+      font-size: 14px;
+    }
+
+    footer h4 {
+      margin-bottom: 18px;
+      color: var(--lime);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer li {
+      margin-bottom: 10px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    footer li:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #292929;
+      padding-top: 25px;
+      color: #777;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 80px 7%;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .intro,
+      .featured-box {
+        grid-template-columns: 1fr;
+      }
+
+      .intro {
+        gap: 35px;
+      }
+
+      .policy-grid,
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 20px;
+      }
+
+      .featured-box {
+        padding: 40px 30px;
+      }
+
+      .featured h2 {
+        font-size: 40px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .topbar {
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+
+      .intro h2,
+      .section-heading h2 {
+        font-size: 36px;
+      }
+
+      .policy-card {
+        padding: 28px;
+      }
+
+      .cta h2 {
+        font-size: 40px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+
+  <div class="topbar">
+    LIBERTY PARTY
+  </div>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <a href="index.html" class="logo">
+      <div class="logo-mark">L</div>
+      LIBERTY
+    </a>
+
+    <div class="nav-links">
+      <a href="plan.html">Our Plan</a>
+      <a href="team.html">Our Team</a>
+      <a href="news.html">News</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="get-involved.html" class="nav-button">Get Involved</a>
+    </div>
+
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Our Plan
+      </div>
+
+      <h1>
+        A plan for the future.
+      </h1>
+
+      <p>
+        Our plan sets out a range of policy priorities covering the economy,
+        infrastructure, public services, communities and the environment.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- INTRO -->
+
+  <section class="intro">
+
+    <div>
+      <h2>
+        Building a stronger future, one priority at a time.
+      </h2>
+    </div>
+
+    <div>
+
+      <p>
+        Liberty's policy programme is built around a series of priorities
+        designed to address the issues facing the country.
+      </p>
+
+      <p>
+        The policies below are currently placeholder content and can be
+        replaced with your final policy platform.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN POLICIES -->
+
+  <section class="policy-section">
+
+    <div class="section-heading">
+
+      <div>
+        <div class="eyebrow" style="color:#8fca00;">
+          Policy Priorities
+        </div>
+
+        <h2>
+          Our priorities
+        </h2>
+      </div>
+
+      <p>
+        A selection of policy areas forming the foundation of the Liberty
+        policy programme.
+      </p>
+
+    </div>
+
+
+    <div class="policy-grid">
+
+      <!-- POLICY 01 -->
+
+      <div class="policy-card">
+
+        <div class="policy-number">
+          01 / ECONOMY
+        </div>
+
+        <h3>
+          Growing the Economy
+        </h3>
+
+        <p>
+          Placeholder policy: introduce measures intended to encourage
+          investment, support businesses and improve productivity across
+          the economy.
+        </p>
+
+        <a href="#" class="policy-link">
+          Read more →
+        </a>
+
+      </div>
+
+
+      <!-- POLICY 02 -->
+
+      <div class="policy-card">
+
+        <div class="policy-number">
+          02 / INFRASTRUCTURE
+        </div>
+
+        <h3>
+          Building Infrastructure
+        </h3>
+
+        <p>
+          Placeholder policy: develop a long-term infrastructure programme
+          covering transport, housing, public facilities and regional
+          development.
+        </p>
+
+        <a href="#" class="policy-link">
+          Read more →
+        </a>
+
+      </div>
+
+
+      <!-- POLICY 03 -->
+
+      <div class="policy-card">
+
+        <div class="policy-number">
+          03 / EDUCATION
+        </div>
+
+        <h3>
+          Better Education
+        </h3>
+
+        <p>
+          Placeholder policy: strengthen educational opportunities,
+          improve access to vocational training and support schools in
+          delivering strong outcomes.
+        </p>
+
+        <a href="#" class="policy-link">
+          Read more →
+        </a>
+
+      </div>
+
+
+      <!-- POLICY 04 -->
+
+      <div class="policy-card">
+
+        <div class="policy-number">
+          04 / HEALTH
+        </div>
+
+        <h3>
+          Health & Public Services
+        </h3>
+
+        <p>
+          Placeholder policy: improve public-service delivery through
+          additional capacity, infrastructure investment and reforms to
+          service administration.
+        </p>
+
+        <a href="#" class="policy-link">
+          Read more →
+        </a>
+
+      </div>
+
+
+      <!-- POLICY 05 -->
+
+      <div class="policy-card">
+
+        <div class="policy-number">
+          05 / COMMUNITIES
+        </div>
+
+        <h3>
+          Stronger Communities
+        </h3>
+
+        <p>
+          Placeholder policy: support local communities through targeted
+          investment, regional development initiatives and partnerships
+          with local organisations.
+        </p>
+
+        <a href="#" class="policy-link">
+          Read more →
+        </a>
+
+      </div>
+
+
+      <!-- POLICY 06 -->
+
+      <div class="policy-card">
+
+        <div class="policy-number">
+          06 / ENVIRONMENT
+        </div>
+
+        <h3>
+          A Sustainable Future
+        </h3>
+
+        <p>
+          Placeholder policy: support practical environmental measures
+          while considering the economic and social effects of major
+          environmental decisions.
+        </p>
+
+        <a href="#" class="policy-link">
+          Read more →
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURED POLICY -->
+
+  <section class="featured">
+
+    <div class="featured-box">
+
+      <div>
+
+        <div class="featured-label">
+          Featured Programme
+        </div>
+
+        <h2>
+          The Future Growth Programme
+        </h2>
+
+        <p>
+          PLACEHOLDER: This section can be used for your flagship policy
+          package. Replace this text with a description of the programme,
+          its objectives and the problem it is intended to address.
+        </p>
+
+      </div>
+
+
+      <div class="featured-list">
+
+        <div class="featured-item">
+          <strong>Investment</strong>
+          <span>$X.XB</span>
+        </div>
+
+        <div class="featured-item">
+          <strong>Projects</strong>
+          <span>XX</span>
+        </div>
+
+        <div class="featured-item">
+          <strong>Timeframe</strong>
+          <span>20XX–20XX</span>
+        </div>
+
+        <div class="featured-item">
+          <strong>Priority Areas</strong>
+          <span>XX</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DETAILED POLICIES -->
+
+  <section class="details">
+
+    <div class="section-heading">
+
+      <div>
+        <div class="eyebrow" style="color:#8fca00;">
+          More Policy
+        </div>
+
+        <h2>
+          More of the plan
+        </h2>
+      </div>
+
+      <p>
+        Additional placeholder policy areas that you can expand into
+        dedicated policy pages.
+      </p>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div class="detail-card">
+
+        <h3>
+          Tax & Government
+        </h3>
+
+        <p>
+          PLACEHOLDER: Outline proposed changes to taxation, government
+          spending, public-sector administration and fiscal policy.
+        </p>
+
+      </div>
+
+
+      <div class="detail-card">
+
+        <h3>
+          Housing
+        </h3>
+
+        <p>
+          PLACEHOLDER: Outline policies covering housing supply,
+          affordability, planning rules and home ownership.
+        </p>
+
+      </div>
+
+
+      <div class="detail-card">
+
+        <h3>
+          Regional Development
+        </h3>
+
+        <p>
+          PLACEHOLDER: Outline investment and development proposals for
+          towns, cities and regional economies.
+        </p>
+
+      </div>
+
+
+      <div class="detail-card">
+
+        <h3>
+          Energy
+        </h3>
+
+        <p>
+          PLACEHOLDER: Outline policies relating to electricity generation,
+          energy security, infrastructure and future investment.
+        </p>
+
+      </div>
+
+
+      <div class="detail-card">
+
+        <h3>
+          Transport
+        </h3>
+
+        <p>
+          PLACEHOLDER: Outline proposals for roads, public transport,
+          rail, airports and other transport infrastructure.
+        </p>
+
+      </div>
+
+
+      <div class="detail-card">
+
+        <h3>
+          Justice & Communities
+        </h3>
+
+        <p>
+          PLACEHOLDER: Outline policies relating to the justice system,
+          community safety and support for local communities.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <h2>
+      Explore the plan.
+    </h2>
+
+    <p>
+      Read through the policy programme and explore the individual
+      priorities in more detail.
+    </p>
+
+    <a href="#" class="cta-button">
+      View All Policies →
+    </a>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-top">
+
+      <div class="footer-brand">
+
+        <h2>
+          LIBERTY
+        </h2>
+
+        <p>
+          Information about Liberty, its policies, organisation and
+          activities.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Explore
+        </h4>
+
+        <ul>
+          <li><a href="plan.html">Our Plan</a></li>
+          <li><a href="team.html">Our Team</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Get Involved
+        </h4>
+
+        <ul>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="volunteer.html">Volunteer</a></li>
+          <li><a href="updates.html">Get Updates</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Follow
+        </h4>
+
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">X</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 Liberty
+      </span>
+
+      <span>
+        Privacy · Terms · Accessibility
+      </span>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
+```
