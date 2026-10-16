@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Sign In | Liberty</title>
+
+  <style>
+    :root {
+      --lime: #b8ff00;
+      --black: #111111;
+      --white: #ffffff;
+      --grey: #777777;
+      --light: #f4f5f1;
+      --border: #deded8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--black);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation */
+    nav {
+      height: 78px;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo-mark {
+      width: 39px;
+      height: 39px;
+      background: var(--lime);
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .nav-link {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--lime);
+    }
+
+    /* Main layout */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 65px 20px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 1050px;
+      min-height: 590px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--white);
+      box-shadow: 0 12px 45px rgba(0,0,0,0.08);
+    }
+
+    /* Left panel */
+    .welcome-panel {
+      background: var(--black);
+      color: var(--white);
+      padding: 65px 55px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-panel::after {
+      content: "L";
+      position: absolute;
+      font-size: 430px;
+      font-weight: 900;
+      color: rgba(184,255,0,0.07);
+      right: -15px;
+      bottom: -125px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .welcome-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      color: var(--lime);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .welcome-panel h1 {
+      font-size: 43px;
+      line-height: 1.12;
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    .welcome-panel h1 span {
+      color: var(--lime);
+    }
+
+    .welcome-panel p {
+      color: #c5c5c5;
+      line-height: 1.7;
+      font-size: 15px;
+      max-width: 350px;
+    }
+
+    .panel-bottom {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid #383838;
+      padding-top: 22px;
+      color: #999;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Sign-in panel */
+    .form-panel {
+      padding: 65px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-panel h2 {
+      font-size: 29px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .form-description {
+      color: var(--grey);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    .form-group input {
+      width: 100%;
+      height: 49px;
+      border: 1px solid var(--border);
+      background: #fafaf8;
+      padding: 0 14px;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--black);
+      box-shadow: 0 0 0 2px rgba(184,255,0,0.45);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 75px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      color: #555;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4px 0 27px;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #555;
+    }
+
+    .remember input {
+      accent-color: var(--black);
+    }
+
+    .form-options a,
+    .register-link a {
+      color: var(--black);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .form-options a:hover,
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+
+    .sign-in-button {
+      width: 100%;
+      height: 51px;
+      border: none;
+      background: var(--lime);
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .sign-in-button:hover {
+      background: #a5e600;
+      transform: translateY(-2px);
+    }
+
+    .message {
+      display: none;
+      background: #f2f8df;
+      border-left: 3px solid var(--lime);
+      padding: 12px;
+      margin-top: 16px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .register-link {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--grey);
+      font-size: 13px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--white);
+      border-top: 1px solid #e7e7e7;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    .footer-links a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--black);
+    }
+
+    /* Mobile */
+    @media (max-width: 760px) {
+      nav {
+        padding: 0 6%;
+      }
+
+      main {
+        padding: 35px 15px;
+      }
+
+      .login-container {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+
+      .welcome-panel {
+        min-height: 230px;
+        padding: 35px;
+      }
+
+      .welcome-panel h1 {
+        font-size: 32px;
+      }
+
+      .welcome-panel p {
+        font-size: 13px;
+      }
+
+      .panel-bottom {
+        display: none;
+      }
+
+      .form-panel {
+        padding: 40px 30px;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-mark">L</div>
+      LIBERTY
+    </a>
+
+    <a href="index.html" class="nav-link">← Back to Liberty</a>
+  </nav>
+
+  <main>
+    <div class="login-container">
+
+      <section class="welcome-panel">
+        <div class="welcome-content">
+          <div class="eyebrow">Liberty Members</div>
+
+          <h1>
+            Welcome<br>
+            <span>back.</span>
+          </h1>
+
+          <p>
+            Access your Liberty membership portal, manage your
+            membership details and stay connected with the party.
+          </p>
+        </div>
+
+        <div class="panel-bottom">
+          Liberty Member Portal
+        </div>
+      </section>
+
+      <section class="form-panel">
+        <h2>Member Sign In</h2>
+
+        <p class="form-description">
+          Sign in using the email address and password associated
+          with your Liberty membership.
+        </p>
+
+        <form id="loginForm">
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+
+            <div class="password-wrap">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="show-password"
+                id="togglePassword"
+              >
+                SHOW
+              </button>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="remember">
+              <input type="checkbox" name="remember">
+              Remember me
+            </label>
+
+            <a href="forgot-password.html">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="sign-in-button">
+            Sign In →
+          </button>
+
+          <div class="message" id="message" role="status">
+            This is a demonstration page. Connect your authentication
+            service to enable member sign-in.
+          </div>
+
+        </form>
+
+        <div class="register-link">
+          Not a member yet?
+          <a href="join.html">Join Liberty</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div>© 2026 Liberty. All rights reserved.</div>
+
+    <div class="footer-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+      <a href="index.html">Home</a>
+    </div>
+  </footer>
+
+  <script>
+    // Password visibility toggle
+    const password = document.getElementById("password");
+    const toggle = document.getElementById("togglePassword");
+
+    toggle.addEventListener("click", () => {
+      const isHidden = password.type === "password";
+
+      password.type = isHidden ? "text" : "password";
+      toggle.textContent = isHidden ? "HIDE" : "SHOW";
+    });
+
+    // Demonstration form submission
+    document.getElementById("loginForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      document.getElementById("message").style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
+```
