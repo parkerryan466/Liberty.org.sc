@@ -1,0 +1,976 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our History | Liberty Party</title>
+
+<style>
+:root {
+  --lime: #b8ff00;
+  --black: #111;
+  --white: #fff;
+  --light: #f4f5f1;
+  --grey: #777;
+  --border: #e2e4dc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+}
+
+/* NAVIGATION */
+
+header {
+  height: 78px;
+  background: var(--black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo-mark {
+  width: 39px;
+  height: 39px;
+  background: var(--lime);
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+nav a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--lime);
+}
+
+nav .join {
+  background: var(--lime);
+  color: var(--black);
+  padding: 11px 17px;
+}
+
+/* HERO */
+
+.hero {
+  background: var(--black);
+  color: white;
+  min-height: 440px;
+  padding: 85px 8%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero::after {
+  content: "L";
+  position: absolute;
+  right: 7%;
+  bottom: -170px;
+  font-size: 570px;
+  line-height: 1;
+  font-weight: 900;
+  color: rgba(184,255,0,0.055);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 750px;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  color: var(--lime);
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 6vw, 67px);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.hero h1 span { color: var(--lime); }
+
+.hero p {
+  color: #ccc;
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 620px;
+}
+
+/* PAGE NAVIGATION */
+
+.page-nav {
+  background: var(--lime);
+  padding: 15px 8%;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.page-nav a {
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.page-nav a:hover { text-decoration: underline; }
+
+/* GENERAL SECTIONS */
+
+.container {
+  max-width: 1180px;
+  margin: auto;
+  padding: 75px 25px;
+}
+
+.section-label {
+  color: #668d00;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 13px;
+}
+
+.section-title {
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 900;
+  margin-bottom: 22px;
+}
+
+.intro-text {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.9;
+  max-width: 850px;
+}
+
+.history-intro {
+  background: var(--light);
+}
+
+.history-columns {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 55px;
+  align-items: start;
+}
+
+.history-copy p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 17px;
+}
+
+.history-highlight {
+  background: var(--black);
+  color: white;
+  padding: 32px;
+  border-top: 5px solid var(--lime);
+}
+
+.history-highlight h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.history-highlight p {
+  color: #ccc;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* PARTY TIMELINE */
+
+.timeline-section {
+  background: white;
+}
+
+.timeline-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.timeline-heading .intro-text {
+  margin: auto;
+}
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: var(--lime);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 70px;
+  padding-bottom: 40px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-dot {
+  position: absolute;
+  left: 13px;
+  top: 4px;
+  width: 23px;
+  height: 23px;
+  border: 5px solid var(--lime);
+  background: var(--black);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-year {
+  color: #6b9200;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.timeline-item h3 {
+  font-size: 19px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.timeline-item p {
+  color: #666;
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 720px;
+}
+
+/* PRIME MINISTER PROFILES */
+
+.leaders-section {
+  background: var(--light);
+}
+
+.leaders-heading {
+  margin-bottom: 38px;
+}
+
+.leaders-heading p {
+  color: #666;
+  font-size: 14px;
+  max-width: 720px;
+}
+
+.leader-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.leader-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 27px;
+  position: relative;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.leader-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+.leader-card.current {
+  border-top: 5px solid var(--lime);
+}
+
+.leader-number {
+  color: #8a8a8a;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.leader-card h3 {
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+.leader-dates {
+  display: inline-block;
+  margin: 11px 0 15px;
+  background: var(--light);
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.leader-card p {
+  color: #666;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.current-label {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--black);
+  padding: 5px 9px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* MODERN ERA */
+
+.modern-era {
+  background: var(--black);
+  color: white;
+}
+
+.modern-era .section-label { color: var(--lime); }
+
+.modern-era .intro-text { color: #ccc; }
+
+.modern-era .section-title { color: white; }
+
+.modern-era .leader-card {
+  background: #1d1d1d;
+  border: 1px solid #333;
+  color: white;
+}
+
+.modern-era .leader-card p { color: #ccc; }
+
+.modern-era .leader-dates {
+  background: #333;
+  color: white;
+}
+
+.modern-era .leader-number { color: #aaa; }
+
+/* CURRENT LEADER */
+
+.current-leader {
+  background: var(--lime);
+  color: var(--black);
+  padding: 55px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: 45px;
+}
+
+.current-leader .section-label { color: #405900; }
+
+.current-leader h2 {
+  font-size: 33px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.current-leader p {
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* FOOTER */
+
+footer {
+  background: #090909;
+  color: #999;
+  padding: 35px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 11px;
+}
+
+.footer-logo {
+  color: white;
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+footer a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+footer a:hover { color: var(--lime); }
+
+@media(max-width: 800px) {
+  header {
+    height: auto;
+    padding: 20px 5%;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  nav {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  nav a { font-size: 11px; }
+
+  .hero { padding: 65px 7%; }
+
+  .hero::after { right: -100px; }
+
+  .history-columns,
+  .leader-grid,
+  .current-leader {
+    grid-template-columns: 1fr;
+  }
+
+  .container { padding: 55px 22px; }
+
+  .current-leader { padding: 32px; }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">L</div>
+    LIBERTY
+  </a>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="ourplan.html">Our Plan</a>
+    <a href="ourteam.html">Our Team</a>
+    <a href="about.html" class="active">About</a>
+    <a href="members.html">Members</a>
+    <a href="join.html" class="join">Join Liberty</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Liberty Party · Established 1908</div>
+
+    <h1>A history of<br><span>Liberty.</span></h1>
+
+    <p>
+      More than a century of political history, leadership and
+      public service. Discover the people and premierships that
+      have shaped the Liberty Party and Square Country.
+    </p>
+  </div>
+</section>
+
+<!-- PAGE NAVIGATION -->
+
+<div class="page-nav">
+  <a href="#origins">Our Origins</a>
+  <a href="#timeline">Historical Timeline</a>
+  <a href="#leaders">Prime Ministers</a>
+  <a href="#modern">Modern Era</a>
+  <a href="#parker">Current Leadership</a>
+</div>
+
+<!-- ORIGINS -->
+
+<section class="history-intro" id="origins">
+  <div class="container">
+    <div class="history-columns">
+
+      <div class="history-copy">
+        <div class="section-label">1908 – Present</div>
+
+        <h2 class="section-title">
+          The origins of the Liberty Party
+        </h2>
+
+        <p>
+          The Liberty Party was founded in 1908 amid growing debate
+          about individual freedom, economic opportunity and the
+          appropriate role of government in Square Country.
+          Its early supporters included businesspeople, advocates
+          of classical liberalism and those who believed that
+          excessive government intervention could restrict
+          enterprise and individual initiative.
+        </p>
+
+        <p>
+          From its earliest years, Liberty placed considerable
+          emphasis on free markets, lower taxation, responsible
+          public spending and the protection of individual rights.
+          The party also supported freedoms of speech and the press,
+          alongside the right to private property.
+        </p>
+
+        <p>
+          Over the decades, Liberty's political identity developed
+          through successive governments and changing national
+          circumstances. Its governments pursued economic
+          liberalisation, deregulation and private-sector development,
+          while its leaders faced differing challenges in economic
+          management, social policy and national affairs.
+        </p>
+
+        <p>
+          The party's history is not without controversy. Its
+          premierships have included periods of economic growth,
+          political division, scandal and significant national change.
+          Together, these experiences form the history of Liberty
+          in Square Country.
+        </p>
+      </div>
+
+      <aside class="history-highlight">
+        <div class="eyebrow">The Liberty tradition</div>
+
+        <h3>A political movement shaped by generations</h3>
+
+        <p>
+          Founded in 1908, Liberty has been associated with
+          classical liberal principles, individual freedoms,
+          private enterprise and limited government.
+        </p>
+
+        <br>
+
+        <p>
+          Its history has been shaped by the Prime Ministers who
+          led the party and the decisions made during their time
+          in office.
+        </p>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+
+<section class="timeline-section" id="timeline">
+  <div class="container">
+
+    <div class="timeline-heading">
+      <div class="section-label">A century of leadership</div>
+      <h2 class="section-title">The Liberty timeline</h2>
+      <p class="intro-text">
+        From the party's establishment to the present day,
+        these are the defining periods of Liberty's history
+        and its Prime Ministers.
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1908</div>
+        <h3>The Liberty Party is founded</h3>
+        <p>
+          A political movement emerges around individual liberty,
+          free enterprise and a reduced role for government
+          in the economy.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1918 – 1926</div>
+        <h3>Thomas Bellamy's government</h3>
+        <p>
+          Liberty enters government under Thomas R. Bellamy,
+          pursuing economic reforms and a greater role for
+          private enterprise.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1934 – 1946</div>
+        <h3>The Yealands and Quayle era</h3>
+        <p>
+          Gregory H. Yealands leads the party until his
+          assassination in 1942. Robert Quayle subsequently
+          assumes the premiership.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1958 – 1966</div>
+        <h3>Nathaniel Hawthorne</h3>
+        <p>
+          Liberty returns to the premiership under Nathaniel
+          Hawthorne during a period of considerable social
+          and political tension.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1982 – 1990</div>
+        <h3>Matthew Lancaster</h3>
+        <p>
+          A period of economic liberalisation, privatisation
+          and deregulation marks Lancaster's time in office.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1998 – 2006</div>
+        <h3>Elliott Wallace</h3>
+        <p>
+          Wallace's premiership is associated with free-market
+          reforms, business growth and increasing debate about
+          economic inequality and government transparency.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2014 – 2019</div>
+        <h3>Lockwood and Feld</h3>
+        <p>
+          Ruth Lockwood leads a period of economic and
+          infrastructure development, followed by Ian Feld's
+          short and controversial premiership in 2018.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2019 – 2025</div>
+        <h3>Trent McKenzie</h3>
+        <p>
+          McKenzie leads Liberty through a period of economic
+          renewal, infrastructure investment and international
+          engagement.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2025 – Present</div>
+        <h3>Ryan Parker</h3>
+        <p>
+          Following a change in party leadership, Ryan Parker
+          becomes Prime Minister and leads Liberty into its
+          current political era.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HISTORICAL PRIME MINISTERS -->
+
+<section class="leaders-section" id="leaders">
+  <div class="container">
+
+    <div class="leaders-heading">
+      <div class="section-label">The leaders of Liberty</div>
+      <h2 class="section-title">Our Prime Ministers</h2>
+      <p>
+        The Liberty Party has been led by ten Prime Ministers
+        in Square Country. Each administration has left its
+        own mark on the party and the country's political history.
+      </p>
+    </div>
+
+    <div class="leader-grid">
+
+      <article class="leader-card">
+        <div class="leader-number">16th Prime Minister of Square Country</div>
+        <h3>Thomas R. Bellamy</h3>
+        <div class="leader-dates">1918 – 1926</div>
+        <p>
+          Bellamy's premiership followed a period of economic
+          uncertainty after the First World War. His government
+          pursued economic stabilisation and public works
+          programmes aimed at rebuilding infrastructure and
+          creating employment. He also introduced reforms
+          intended to reduce government intervention and
+          strengthen the private sector.
+        </p>
+      </article>
+
+      <article class="leader-card">
+        <div class="leader-number">18th Prime Minister of Square Country</div>
+        <h3>Gregory H. Yealands</h3>
+        <div class="leader-dates">1934 – 1942</div>
+        <p>
+          Yealands became one of the most controversial figures
+          in the early history of Liberty. His government
+          pursued strongly pro-business policies, which critics
+          argued favoured large corporations over workers.
+          He also supported measures intended to expand
+          personal freedoms and civil liberties. His premiership
+          ended with his assassination in 1942.
+        </p>
+      </article>
+
+      <article class="leader-card">
+        <div class="leader-number">19th Prime Minister of Square Country</div>
+        <h3>Robert D. Quayle</h3>
+        <div class="leader-dates">1942 – 1946</div>
+        <p>
+          Quayle succeeded Gregory H. Yealands in 1942,
+          taking leadership during a significant moment
+          in Square Country's political history. His
+          premiership continued the Liberty Party's place
+          in national government through the remainder
+          of the wartime period.
+        </p>
+      </article>
+
+      <article class="leader-card">
+        <div class="leader-number">21st Prime Minister of Square Country</div>
+        <h3>Nathaniel C. Hawthorne</h3>
+        <div class="leader-dates">1958 – 1966</div>
+        <p>
+          Hawthorne's government presided over industrial
+          expansion and economic growth. His premiership
+          was also deeply controversial, particularly over
+          racial segregation policies and resistance to
+          growing civil rights demands. The social divisions
+          of his administration became a defining issue
+          in the country's political history.
+        </p>
+      </article>
+
+      <article class="leader-card">
+        <div class="leader-number">24th Prime Minister of Square Country</div>
+        <h3>Matthew D. Lancaster</h3>
+        <div class="leader-dates">1982 – 1990</div>
+        <p>
+          A former military officer, Lancaster brought a
+          conservative approach to government. His
+          administration pursued tax reductions, lower
+          government spending, privatisation and economic
+          deregulation. Square Country experienced
+          substantial economic growth, although concerns
+          about inequality grew during his premiership.
+        </p>
+      </article>
+
+      <article class="leader-card">
+        <div class="leader-number">26th Prime Minister of Square Country</div>
+        <h3>Elliott F. Wallace</h3>
+        <div class="leader-dates">1998 – 2006</div>
+        <p>
+          A former business magnate, Wallace championed
+          free-market economics and deregulation. His
+          administration oversaw growth in technology
+          and finance, while critics raised concerns
+          about wealth inequality, environmental policy
+          and transparency in government contracts.
+        </p>
+      </article>
+
+      <article class="leader-card">
+        <div class="leader-number">28th Prime Minister of Square Country</div>
+        <h3>Ruth A. Lockwood</h3>
+        <div class="leader-dates">2014 – 2018</div>
+        <p>
+          Lockwood pursued market-friendly economic reforms
+          and sought to encourage private-sector development.
+          Her government introduced the Future Square
+          infrastructure and development programme.
+          Her premiership also faced criticism over
+          regional inequality and allegations of
+          political favouritism.
+        </p>
+      </article>
+
+      <article class="leader-card">
+        <div class="leader-number">29th Prime Minister of Square Country</div>
+        <h3>Ian Feld</h3>
+        <div class="leader-dates">2018</div>
+        <p>
+          Feld's brief premiership was marked by controversy
+          and allegations of financial mismanagement.
+          Investigations into his financial dealings and
+          mounting political pressure led to his departure
+          after a short period in office.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODERN ERA -->
+
+<section class="modern-era" id="modern">
+  <div class="container">
+
+    <div class="section-label">The modern Liberty Party</div>
+    <h2 class="section-title">A new chapter in government</h2>
+
+    <p class="intro-text">
+      The modern era of Liberty has been shaped by the
+      administrations of Trent McKenzie and Ryan Parker.
+      Their leadership has taken place amid changing
+      economic conditions, political challenges and
+      developments in Square Country's international role.
+    </p>
+
+    <div class="leader-grid" style="margin-top:35px;">
+
+      <article class="leader-card">
+        <div class="leader-number">30th Prime Minister of Square Country</div>
+        <h3>Trent M. McKenzie</h3>
+        <div class="leader-dates">2019 – 2025</div>
+        <p>
+          McKenzie became Prime Minister following the
+          political instability of 2018. His administration
+          prioritised economic renewal, debt reduction,
+          foreign investment and long-term infrastructure
+          projects, including rural transport and renewable
+          energy initiatives. His government was also
+          recognised for maintaining international
+          relationships. His premiership ended in 2025
+          following a leadership challenge and dismissal
+          from office.
+        </p>
+      </article>
+
+      <article class="leader-card current">
+        <div class="current-label">Current Prime Minister</div>
+        <div class="leader-number">31st Prime Minister of Square Country</div>
+        <h3>Rt Hon Ryan D. Parker</h3>
+        <div class="leader-dates">2025 – Present</div>
+        <p>
+          Ryan Parker assumed the premiership in September
+          2025 following a party leadership change.
+          He called a snap election shortly after taking
+          office, leading Liberty into a new election
+          campaign and securing a return to government.
+          His administration has focused on economic
+          growth, defence legislation, border security
+          and developments in the Rivorian conflict.
+        </p>
+      </article>
+
+    </div>
+
+    <div class="current-leader" id="parker">
+      <div>
+        <div class="section-label">The present day</div>
+        <h2>The Rt Hon<br>Ryan D. Parker</h2>
+      </div>
+
+      <p>
+        The current chapter of Liberty's history is being
+        written under Prime Minister Ryan Parker. Since
+        taking office in 2025, Parker has led the party
+        through a snap election, parliamentary challenges
+        and the introduction of the 2026 Think Big Budget.
+        His premiership represents the latest chapter in
+        a political tradition that began with the founding
+        of the Liberty Party in 1908.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">LIBERTY</div>
+
+  <div>
+    The history of the Liberty Party · Square Country
+  </div>
+
+  <div>
+    <a href="index.html">Home</a>
+    &nbsp; | &nbsp;
+    <a href="members.html">Members</a>
+    &nbsp; | &nbsp;
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
