@@ -1,0 +1,816 @@
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growing the Economy | Liberty</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --lime:#b8ff00;
+  --lime-dark:#80b500;
+  --black:#090909;
+  --grey:#666;
+  --light:#f4f5f1;
+  --border:#e5e5e5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;color:var(--black);line-height:1.65}
+a{text-decoration:none;color:inherit}
+.topbar{background:var(--black);color:white;padding:9px 6%;text-align:right;font-size:12px;font-weight:700}
+nav{height:78px;display:flex;justify-content:space-between;align-items:center;padding:0 6%;background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:11px;font-size:24px;font-weight:900}
+.logo-mark{width:42px;height:42px;background:var(--lime);display:grid;place-items:center;font-size:25px}
+.nav-links{display:flex;align-items:center;gap:25px;font-size:13px;font-weight:700}
+.nav-links a:hover{color:var(--lime-dark)}
+.nav-button{background:var(--black);color:white;padding:11px 17px}
+.hero{background:var(--black);color:white;padding:100px 8%;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:390px;height:390px;border:60px solid var(--lime);border-radius:50%;right:-160px;top:-160px}
+.hero-content{position:relative;z-index:1;max-width:850px}
+.eyebrow{color:var(--lime-dark);text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:800;margin-bottom:15px}
+.hero .eyebrow{color:var(--lime)}
+.hero h1{font-size:clamp(48px,7vw,82px);line-height:1;letter-spacing:-4px;margin-bottom:25px}
+.hero p{color:#ccc;max-width:700px;font-size:18px}
+.breadcrumb{padding:17px 8%;background:var(--light);font-size:12px;color:var(--grey)}
+.breadcrumb a{text-decoration:underline}
+section{padding:75px 8%}
+h2{font-size:39px;letter-spacing:-1.8px;line-height:1.12;margin-bottom:20px}
+h3{font-size:22px;letter-spacing:-.5px;margin-bottom:12px}
+p{color:var(--grey);margin-bottom:15px}
+.intro{display:grid;grid-template-columns:1fr 1.5fr;gap:65px}
+.stats{background:var(--light);display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.stat{background:white;padding:28px;border-top:4px solid var(--lime)}
+.stat strong{display:block;font-size:34px;letter-spacing:-1px}
+.stat span{color:var(--grey);font-size:13px}
+.stat small{display:block;color:#888;font-size:10px;margin-top:8px}
+.section-heading{max-width:750px;margin-bottom:38px}
+.policy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.policy-card{padding:30px;background:var(--light);border:1px solid var(--border)}
+.policy-number{font-size:12px;color:var(--lime-dark);font-weight:900;margin-bottom:18px}
+.benefit{border-left:3px solid var(--lime);padding-left:14px;margin-top:20px}
+.benefit strong{font-size:12px;text-transform:uppercase;letter-spacing:1px}
+.benefit p{font-size:13px;margin:5px 0 0}
+.dark-section{background:var(--black);color:white}
+.dark-section h2{color:white}
+.dark-section p{color:#bbb}
+.dark-section .policy-card{background:#171717;border-color:#333}
+.dark-section .policy-card p{color:#bbb}
+.chart-section{background:var(--light)}
+.chart-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.chart-card{background:white;padding:25px;border:1px solid var(--border);min-width:0}
+.chart-card h3{font-size:18px}
+.chart-card p{font-size:12px}
+.chart-wrap{height:280px;position:relative}
+.full-width{grid-column:1/-1}
+.note{padding:17px 20px;background:#fff5d9;border-left:4px solid #d99a00;color:#60480b;font-size:13px;margin:25px 0}
+.data-note{font-size:11px;color:#888;margin-top:12px}
+.data-table{width:100%;border-collapse:collapse;margin-top:25px;font-size:13px}
+.data-table th,.data-table td{padding:13px;text-align:left;border-bottom:1px solid var(--border)}
+.data-table th{background:var(--black);color:white}
+.data-table td{color:var(--grey)}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.principle{padding:25px;background:var(--light);border-top:4px solid var(--lime)}
+.principle p{font-size:13px}
+.sources{background:var(--light)}
+.sources ul{padding-left:20px;color:var(--grey)}
+.sources li{margin:10px 0}
+.sources a{text-decoration:underline}
+footer{background:var(--black);color:white;padding:55px 8% 25px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px;padding-bottom:40px}
+footer h3{color:var(--lime)}
+footer p,footer li{color:#999;font-size:13px}
+footer ul{list-style:none}
+footer li{margin:8px 0}
+.footer-bottom{border-top:1px solid #333;padding-top:20px;color:#777;font-size:11px}
+@media(max-width:800px){
+.nav-links{display:none}
+.intro{grid-template-columns:1fr;gap:20px}
+.policy-grid,.chart-grid{grid-template-columns:1fr}
+.stats,.principles{grid-template-columns:1fr}
+.full-width{grid-column:auto}
+.hero h1{letter-spacing:-2px}
+.footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">LIBERTY PARTY</div>
+
+<nav>
+  <a class="logo" href="index.html">
+    <div class="logo-mark">L</div> LIBERTY
+  </a>
+  <div class="nav-links">
+    <a href="plan.html">Our Plan</a>
+    <a href="team.html">Our Team</a>
+    <a href="news.html">News</a>
+    <a href="about.html">About</a>
+    <a href="get-involved.html" class="nav-button">Get Involved</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Our Plan / Economic Policy</div>
+    <h1>Growing the Economy.</h1>
+    <p>
+      Building a more productive economy through responsible financial
+      management, business investment, better infrastructure, international
+      trade and a skilled workforce.
+    </p>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a> /
+  <a href="plan.html">Our Plan</a> /
+  Growing the Economy
+</div>
+
+<section class="intro">
+  <div>
+    <div class="eyebrow">Economic Policy</div>
+    <h2>A stronger, more productive economy.</h2>
+  </div>
+  <div>
+    <p>
+      Liberty's economic programme is focused on creating the conditions
+      for businesses to invest, workers to develop new skills, exporters
+      to reach international markets and government to manage public
+      finances sustainably.
+    </p>
+    <p>
+      Our approach draws on themes in the New Zealand National Party's
+      economic platform: fiscal responsibility, investment, planning
+      reform, trade, infrastructure and productivity.
+    </p>
+    <p>
+      The Budget figures below show the current financial framework
+      supporting the programme. The policies describe intended priorities;
+      they should not be read as proof that any particular economic
+      outcome is guaranteed.
+    </p>
+  </div>
+</section>
+
+<!-- BUDGET HEADLINES -->
+
+<section class="stats">
+  <div class="stat">
+    <strong>$261.118B</strong>
+    <span>Total Budget revenue</span>
+    <small>June 2026 Budget spreadsheet</small>
+  </div>
+  <div class="stat">
+    <strong>$241.804B</strong>
+    <span>Total Budget expenditure</span>
+    <small>June 2026 Budget spreadsheet</small>
+  </div>
+  <div class="stat">
+    <strong>$19.314B</strong>
+    <span>Projected surplus</span>
+    <small>Revenue less expenditure in supplied Budget totals</small>
+  </div>
+</section>
+
+<!-- FISCAL RESPONSIBILITY -->
+
+<section>
+  <div class="section-heading">
+    <div class="eyebrow">01 / Fiscal Responsibility</div>
+    <h2>Sound public finances.</h2>
+    <p>
+      A credible fiscal framework helps government plan for the long term,
+      manage borrowing and maintain confidence in public finances.
+    </p>
+  </div>
+
+  <div class="policy-grid">
+    <article class="policy-card">
+      <div class="policy-number">POLICY 01.1</div>
+      <h3>Responsible Budget Management</h3>
+      <p>
+        Establish clear objectives for government debt, operating balances
+        and expenditure growth. Publish regular updates on progress against
+        these objectives.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>More transparent public finances and greater certainty when planning future spending.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 01.2</div>
+      <h3>Value for Money</h3>
+      <p>
+        Regularly review government programmes to identify duplication,
+        ineffective spending and opportunities to improve service delivery.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>Better value from public expenditure and more room to prioritise essential services.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- BUSINESS AND INVESTMENT -->
+
+<section class="dark-section">
+  <div class="section-heading">
+    <div class="eyebrow">02 / Business & Investment</div>
+    <h2>Backing businesses to grow.</h2>
+    <p>
+      Investment in productive assets, technology and people can help
+      businesses expand their capacity and improve productivity.
+    </p>
+  </div>
+
+  <div class="policy-grid">
+    <article class="policy-card">
+      <div class="policy-number">POLICY 02.1</div>
+      <h3>Business Investment & Hiring Acceleration</h3>
+      <p>
+        Provide targeted support for eligible businesses investing in
+        productive assets and expanding their workforce.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $1.2 billion</strong>
+        <p>
+          Intended to support business expansion, new investment and
+          additional employment opportunities.
+        </p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 02.2</div>
+      <h3>Small Business Compliance Relief</h3>
+      <p>
+        Reduce unnecessary administrative complexity and improve access
+        to practical support for small and medium-sized businesses.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $400 million</strong>
+        <p>
+          Intended to reduce compliance burdens and allow business owners
+          to spend more time on productive activities.
+        </p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 02.3</div>
+      <h3>Investment Boost</h3>
+      <p>
+        Consider a tax incentive modelled on National's Investment Boost,
+        allowing businesses to deduct an additional portion of qualifying
+        new capital investment.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>
+          Could reduce the effective upfront tax cost of investment and
+          encourage businesses to modernise equipment and technology.
+        </p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 02.4</div>
+      <h3>Innovation and Technology</h3>
+      <p>
+        Support research commercialisation, technology adoption and
+        investment in industries with potential to increase productivity.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>More innovation, more efficient production and opportunities for new industries.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PLANNING AND REGULATION -->
+
+<section>
+  <div class="section-heading">
+    <div class="eyebrow">03 / Planning & Regulation</div>
+    <h2>Making it easier to build.</h2>
+    <p>
+      A clearer planning and consenting system can reduce uncertainty
+      for businesses, infrastructure providers and developers.
+    </p>
+  </div>
+
+  <div class="policy-grid">
+    <article class="policy-card">
+      <div class="policy-number">POLICY 03.1</div>
+      <h3>Resource Management Reform</h3>
+      <p>
+        Replace complex and overlapping planning requirements with a
+        clearer system that provides consistent rules and more predictable
+        consenting processes.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>Fewer unnecessary delays for housing, infrastructure and commercial development.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 03.2</div>
+      <h3>Building Consent Reform</h3>
+      <p>
+        Review building consent processes and remove unnecessary
+        duplication while retaining appropriate safety standards.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>More predictable project timelines and reduced administrative costs.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- TRADE -->
+
+<section class="dark-section">
+  <div class="section-heading">
+    <div class="eyebrow">04 / Trade & Exports</div>
+    <h2>Connecting New Zealand to the world.</h2>
+    <p>
+      Export growth can create opportunities for businesses to reach
+      larger markets and diversify their customer base.
+    </p>
+  </div>
+
+  <div class="policy-grid">
+    <article class="policy-card">
+      <div class="policy-number">POLICY 04.1</div>
+      <h3>Expanding Trade Relationships</h3>
+      <p>
+        Pursue trade agreements that improve market access and reduce
+        unnecessary barriers for New Zealand exporters.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>More potential customers and a wider range of export markets.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 04.2</div>
+      <h3>Supporting Exporters</h3>
+      <p>
+        Improve access to export information, international networks
+        and support for businesses seeking to enter overseas markets.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>More opportunities for small and medium-sized firms to export.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 04.3</div>
+      <h3>Agricultural Productivity</h3>
+      <p>
+        Encourage agricultural technology, research and productivity
+        improvements across farming, forestry, fishing and food production.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $1.5 billion</strong>
+        <p>Supports investment in technology and productivity across primary industries.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 04.4</div>
+      <h3>Regional Economic Development</h3>
+      <p>
+        Support regional infrastructure and investment projects that
+        improve access to markets and strengthen local economies.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $2.2 billion</strong>
+        <p>Allocated to the Northern Prosperity Plan in the supplied Budget.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- INFRASTRUCTURE -->
+
+<section>
+  <div class="section-heading">
+    <div class="eyebrow">05 / Infrastructure & Energy</div>
+    <h2>Building the foundations for growth.</h2>
+    <p>
+      Reliable transport, energy and public infrastructure can improve
+      connections between workers, businesses and markets.
+    </p>
+  </div>
+
+  <div class="policy-grid">
+    <article class="policy-card">
+      <div class="policy-number">POLICY 05.1</div>
+      <h3>Roads and Freight Corridors</h3>
+      <p>
+        Invest in strategic roads and freight routes that improve the
+        movement of goods between ports, production centres and cities.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $1.5 billion</strong>
+        <p>Intended to improve freight connections and transport reliability.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 05.2</div>
+      <h3>Public Transport Infrastructure</h3>
+      <p>
+        Upgrade urban transport networks and develop rapid transit
+        connections in areas experiencing population growth.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $2 billion</strong>
+        <p>Allocated to bus rapid transit and urban transport upgrades.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 05.3</div>
+      <h3>Energy Security</h3>
+      <p>
+        Encourage investment in reliable electricity generation,
+        transmission and storage to support future energy demand.
+      </p>
+      <div class="benefit">
+        <strong>Potential benefits</strong>
+        <p>Greater electricity-system resilience and more certainty for businesses.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 05.4</div>
+      <h3>Housing Supply Partnerships</h3>
+      <p>
+        Use public-private partnerships to support housing infrastructure
+        and increase the supply of developable land and homes.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $1.8 billion</strong>
+        <p>Intended to support housing supply and related development.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- SKILLS -->
+
+<section class="dark-section">
+  <div class="section-heading">
+    <div class="eyebrow">06 / Skills & Productivity</div>
+    <h2>Investing in people.</h2>
+    <p>
+      A skilled workforce is an important part of a productive economy.
+      Training should help people develop skills that are useful to employers
+      and adaptable to changing industries.
+    </p>
+  </div>
+
+  <div class="policy-grid">
+    <article class="policy-card">
+      <div class="policy-number">POLICY 06.1</div>
+      <h3>Apprenticeship Wage Subsidy</h3>
+      <p>
+        Support eligible employers who take on apprentices and provide
+        structured workplace training.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $900 million</strong>
+        <p>Intended to support apprenticeship opportunities and skills development.</p>
+      </div>
+    </article>
+
+    <article class="policy-card">
+      <div class="policy-number">POLICY 06.2</div>
+      <h3>Fees-Free Vocational Training</h3>
+      <p>
+        Expand access to vocational education and technical qualifications
+        in areas where skills are needed.
+      </p>
+      <div class="benefit">
+        <strong>Budget allocation: $600 million</strong>
+        <p>Intended to reduce financial barriers to vocational training.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- REAL BUDGET CHARTS -->
+
+<section class="chart-section">
+  <div class="section-heading">
+    <div class="eyebrow">June 2026 Budget</div>
+    <h2>The numbers behind the plan.</h2>
+    <p>
+      These charts use the figures in the uploaded June 2026 Budget
+      spreadsheet. Amounts are shown in New Zealand dollars.
+    </p>
+  </div>
+
+  <div class="chart-grid">
+
+    <div class="chart-card">
+      <h3>Revenue Composition</h3>
+      <p>Income tax compared with other tax revenue.</p>
+      <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Expenditure Composition</h3>
+      <p>Initiatives and departmental estimates.</p>
+      <div class="chart-wrap"><canvas id="expenditureChart"></canvas></div>
+    </div>
+
+    <div class="chart-card full-width">
+      <h3>Economic and Infrastructure Initiatives</h3>
+      <p>Selected allocations from the Initiatives worksheet.</p>
+      <div class="chart-wrap"><canvas id="initiativesChart"></canvas></div>
+    </div>
+
+    <div class="chart-card full-width">
+      <h3>Relevant Departmental Estimates</h3>
+      <p>Selected departmental allocations from the Estimates worksheet.</p>
+      <div class="chart-wrap"><canvas id="departmentsChart"></canvas></div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <strong>How to interpret these charts:</strong>
+    These are budget allocations and revenue estimates from the supplied
+    spreadsheet. They are not a time series of GDP, inflation, wages or
+    debt forecasts. The initiative and department charts show selected
+    categories, not every line in the Budget.
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Budget measure</th><th>Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Total revenue</td><td>$261.118 billion</td></tr>
+      <tr><td>Total expenditure</td><td>$241.804 billion</td></tr>
+      <tr><td>Surplus</td><td>$19.314 billion</td></tr>
+      <tr><td>Income tax revenue</td><td>$44.110 billion</td></tr>
+      <tr><td>Other tax revenue</td><td>$217.008 billion</td></tr>
+      <tr><td>Initiatives</td><td>$31.100 billion</td></tr>
+      <tr><td>Departmental estimates</td><td>$210.704 billion</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ECONOMIC EFFECTS -->
+
+<section>
+  <div class="section-heading">
+    <div class="eyebrow">Economic Outlook</div>
+    <h2>How the programme is intended to work.</h2>
+    <p>
+      These are possible economic effects, not guaranteed results.
+      Actual outcomes depend on implementation, economic conditions
+      and the response of households and businesses.
+    </p>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <h3>More Investment</h3>
+      <p>
+        Business incentives and regulatory certainty may encourage
+        investment in equipment, technology and productive assets.
+      </p>
+    </div>
+    <div class="principle">
+      <h3>Higher Productivity</h3>
+      <p>
+        Skills, technology and infrastructure can help workers and
+        businesses produce more value from available resources.
+      </p>
+    </div>
+    <div class="principle">
+      <h3>Export Opportunities</h3>
+      <p>
+        Better trade access and exporter support may help domestic
+        businesses reach more customers overseas.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TAX POLICY NOTE -->
+
+<section class="sources">
+  <div class="eyebrow">Fiscal Policy Consideration</div>
+  <h2>Tax policy and the economic platform.</h2>
+  <p>
+    National's published economic platform includes a commitment to
+    no new taxes. The June 2026 Liberty Budget, however, includes
+    several additional levies, including the Digital Platform Services
+    Tax, Financial Transactions Stamp Duty, Private Natural Resource
+    Extraction Levy and Foreign Workforce Employment Levy.
+  </p>
+  <p>
+    These are different policy choices. If Liberty intends to follow
+    National's no-new-taxes approach, the revenue model and the
+    proposed levies would need to be reviewed and reconciled before
+    the platform is finalised.
+  </p>
+</section>
+
+<section class="sources">
+  <div class="eyebrow">Reference Material</div>
+  <h2>Policy references.</h2>
+  <ul>
+    <li><a href="https://www.national.org.nz/policies/nationals-eco-plan" target="_blank">National's Economic Plan</a></li>
+    <li><a href="https://www.national.org.nz/policies" target="_blank">National Party 2026 Election Policies</a></li>
+    <li><a href="https://www.national.org.nz/news/260928-nicolawillis" target="_blank">National's Economic Plan announcement</a></li>
+    <li><a href="https://www.national.org.nz/policies/47-point-plan-small-businesses" target="_blank">National's Small Business Plan</a></li>
+  </ul>
+  <p class="data-note">
+    Budget source: June 2026 Budget spreadsheet supplied for this page.
+    Figures have been converted from dollars to billions for chart display.
+  </p>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>LIBERTY</h3>
+      <p>Information about Liberty, its policies, organisation and activities.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <ul>
+        <li><a href="plan.html">Our Plan</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>More Information</h3>
+      <ul>
+        <li><a href="about.html">About Liberty</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Liberty Party</div>
+</footer>
+
+<script>
+Chart.defaults.font.family = "Inter";
+Chart.defaults.color = "#666";
+
+const lime = "#83b900";
+const black = "#171717";
+const grey = "#bfc4b8";
+
+function moneyBillions(value) {
+  return "$" + value.toFixed(1) + "B";
+}
+
+function makeDoughnut(id, labels, values) {
+  new Chart(document.getElementById(id), {
+    type: "doughnut",
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: [lime, black, grey],
+        borderWidth: 2,
+        borderColor: "#fff"
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom" },
+        tooltip: {
+          callbacks: {
+            label: context =>
+              context.label + ": " + moneyBillions(context.raw)
+          }
+        }
+      }
+    }
+  });
+}
+
+function makeBar(id, labels, values, horizontal = false) {
+  new Chart(document.getElementById(id), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: lime,
+        borderColor: lime,
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      indexAxis: horizontal ? "y" : "x",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: context => moneyBillions(context.raw)
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: "#eee" },
+          ticks: {
+            callback: value => "$" + value + "B"
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { display: false },
+          ticks: { autoSkip: false }
+        }
+      }
+    }
+  });
+}
+
+// 1. Revenue composition
+makeDoughnut(
+  "revenueChart",
+  ["Income tax", "Other tax revenue"],
+  [44.110, 217.008]
+);
+
+// 2. Expenditure composition
+makeDoughnut(
+  "expenditureChart",
+  ["Initiatives", "Departmental estimates"],
+  [31.100, 210.704]
+);
+
+// 3. Selected economic initiatives
+makeBar(
+  "initiativesChart",
+  [
+    "Northern Prosperity Plan",
+    "Bus Rapid Transit / Urban Transport",
+    "Agriculture Productivity",
+    "Roading & Freight Corridors",
+    "Housing Supply PPP",
+    "Business Investment & Hiring",
+    "Apprenticeship Wage Subsidy",
+    "Small Business Compliance Relief",
+    "Fees-Free Vocational Training"
+  ],
+  [2.2, 2.0, 1.5, 1.5, 1.8, 1.2, 0.9, 0.4, 0.6],
+  true
+);
+
+// 4. Selected departmental estimates
+makeBar(
+  "departmentsChart",
+  [
+    "Public Works",
+    "Housing & Urban Development",
+    "Labour Market",
+    "Transport",
+    "Business, Science & Innovation",
+    "Agriculture, Bio, Fish & Food",
+    "Tertiary Education",
+    "Forestry"
+  ],
+  [28.0, 6.5, 4.2, 5.0, 3.2, 1.8, 2.4, 0.3],
+  true
+);
+</script>
+
+</body>
+</html>
+```
