@@ -488,26 +488,91 @@
     </div>
   </footer>
 
-  <script>
-    // Password visibility toggle
-    const password = document.getElementById("password");
-    const toggle = document.getElementById("togglePassword");
+<script>
+  // ==========================================
+  // LIBERTY MEMBERS DATABASE
+  // Local demonstration database only.
+  // Do not use this approach for real accounts.
+  // ==========================================
 
-    toggle.addEventListener("click", () => {
-      const isHidden = password.type === "password";
+  const membersDatabase = [
+    {
+      id: 1,
+      name: "Ryan Parker",
+      email: "ryanparker@liberty.com",
+      password: "Libertyrocks26",
+      role: "Administrator",
+      membershipStatus: "Active"
+    }
+  ];
 
-      password.type = isHidden ? "text" : "password";
-      toggle.textContent = isHidden ? "HIDE" : "SHOW";
-    });
+  // Password visibility toggle
+  const passwordInput = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
 
-    // Demonstration form submission
-    document.getElementById("loginForm").addEventListener("submit", (event) => {
-      event.preventDefault();
+  togglePassword.addEventListener("click", () => {
+    const isHidden = passwordInput.type === "password";
 
-      document.getElementById("message").style.display = "block";
-    });
-  </script>
+    passwordInput.type = isHidden ? "text" : "password";
+    togglePassword.textContent = isHidden ? "HIDE" : "SHOW";
+  });
+
+  // Sign-in functionality
+  document.getElementById("loginForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = document
+      .getElementById("email")
+      .value.trim()
+      .toLowerCase();
+
+    const password = passwordInput.value;
+    const message = document.getElementById("message");
+
+    // Find matching member
+    const member = membersDatabase.find(user =>
+      user.email.toLowerCase() === email &&
+      user.password === password
+    );
+
+    if (member && member.membershipStatus === "Active") {
+
+      // Save basic demonstration session
+      const session = {
+        id: member.id,
+        name: member.name,
+        email: member.email,
+        role: member.role,
+        membershipStatus: member.membershipStatus
+      };
+
+      sessionStorage.setItem(
+        "libertyMember",
+        JSON.stringify(session)
+      );
+
+      message.style.display = "block";
+      message.style.background = "#eaffbd";
+      message.style.borderLeftColor = "#75a900";
+      message.textContent =
+        "Welcome back, " + member.name +
+        "! You have successfully signed in.";
+
+      // Redirect to the member dashboard after login
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 1200);
+
+    } else {
+
+      message.style.display = "block";
+      message.style.background = "#fff0f0";
+      message.style.borderLeftColor = "#d93025";
+      message.textContent =
+        "Incorrect email or password. Please try again.";
+    }
+  });
+</script>
 
 </body>
 </html>
-```
