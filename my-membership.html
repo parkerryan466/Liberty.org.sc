@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Membership | Liberty</title>
+
+<style>
+:root {
+  --lime: #b8ff00;
+  --black: #111;
+  --white: #fff;
+  --grey: #777;
+  --light: #f4f5f1;
+  --border: #e3e3dd;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--light);
+  color: var(--black);
+}
+
+nav {
+  height: 75px;
+  background: var(--black);
+  padding: 0 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo-mark {
+  height: 38px;
+  width: 38px;
+  background: var(--lime);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black);
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.nav-link:hover {
+  color: var(--lime);
+}
+
+.page-header {
+  background: var(--black);
+  color: white;
+  padding: 65px 7% 75px;
+}
+
+.eyebrow {
+  color: var(--lime);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 17px;
+}
+
+.page-header h1 {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.page-header p {
+  color: #c5c5c5;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 1150px;
+  margin: -30px auto 70px;
+  padding: 0 25px;
+}
+
+.membership-card {
+  background: white;
+  padding: 35px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.05);
+  margin-bottom: 25px;
+  border-top: 5px solid var(--lime);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.card-top h2 {
+  font-size: 23px;
+  font-weight: 900;
+  margin-bottom: 7px;
+}
+
+.card-top p {
+  color: var(--grey);
+  font-size: 13px;
+}
+
+.status {
+  display: inline-block;
+  background: #eaffbd;
+  color: #385900;
+  padding: 9px 15px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status.inactive {
+  background: #fff0f0;
+  color: #a52a2a;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.detail {
+  border-top: 1px solid var(--border);
+  padding-top: 17px;
+}
+
+.detail label {
+  display: block;
+  color: var(--grey);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 9px;
+}
+
+.detail strong {
+  font-size: 16px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.info-card {
+  background: white;
+  padding: 30px;
+  box-shadow: 0 5px 25px rgba(0,0,0,.04);
+}
+
+.info-card h2 {
+  font-size: 19px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.info-card p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row span:first-child {
+  color: var(--grey);
+}
+
+.info-row strong {
+  text-align: right;
+}
+
+.benefit {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 17px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.benefit-mark {
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
+  background: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 21px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  transition: .2s;
+}
+
+.btn-primary {
+  background: var(--lime);
+  color: var(--black);
+}
+
+.btn-primary:hover {
+  background: #a5e600;
+}
+
+.btn-secondary {
+  border: 1px solid var(--border);
+  color: var(--black);
+  background: white;
+}
+
+.btn-secondary:hover {
+  border-color: var(--black);
+}
+
+footer {
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 25px 7%;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  color: var(--grey);
+  font-size: 12px;
+}
+
+footer a {
+  color: #555;
+  text-decoration: none;
+  margin-left: 18px;
+}
+
+@media(max-width: 750px) {
+  nav {
+    padding: 0 5%;
+  }
+
+  .page-header {
+    padding: 45px 6% 65px;
+  }
+
+  .page-header h1 {
+    font-size: 34px;
+  }
+
+  main {
+    padding: 0 15px;
+  }
+
+  .membership-card {
+    padding: 25px;
+  }
+
+  .details-grid,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  footer a {
+    margin: 0 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">L</div>
+    LIBERTY
+  </a>
+
+  <a href="dashboard.html" class="nav-link">← Members Dashboard</a>
+</nav>
+
+<header class="page-header">
+  <div class="eyebrow">Liberty Member Portal</div>
+  <h1>My Membership</h1>
+  <p>Manage your membership information and view your standing within Liberty.</p>
+</header>
+
+<main>
+
+  <section class="membership-card">
+
+    <div class="card-top">
+      <div>
+        <h2 id="memberName">Loading membership...</h2>
+        <p>Your Liberty membership profile</p>
+      </div>
+
+      <span class="status" id="membershipStatus">Active</span>
+    </div>
+
+    <div class="details-grid">
+
+      <div class="detail">
+        <label>Member ID</label>
+        <strong id="memberId">—</strong>
+      </div>
+
+      <div class="detail">
+        <label>Membership Type</label>
+        <strong id="membershipType">Standard Member</strong>
+      </div>
+
+      <div class="detail">
+        <label>Account Role</label>
+        <strong id="memberRole">Member</strong>
+      </div>
+
+      <div class="detail">
+        <label>Full Name</label>
+        <strong id="memberFullName">—</strong>
+      </div>
+
+      <div class="detail">
+        <label>Email Address</label>
+        <strong id="memberEmail">—</strong>
+      </div>
+
+      <div class="detail">
+        <label>Membership Standing</label>
+        <strong id="memberStanding">Good Standing</strong>
+      </div>
+
+    </div>
+
+    <div class="actions">
+      <a href="dashboard.html" class="btn btn-primary">Return to Dashboard</a>
+      <a href="contact.html" class="btn btn-secondary">Contact Liberty</a>
+    </div>
+
+  </section>
+
+  <div class="content-grid">
+
+    <section class="info-card">
+      <h2>Membership Information</h2>
+
+      <p>
+        Your Liberty membership gives you access to the party's
+        member portal, updates and internal membership information.
+      </p>
+
+      <div class="info-row">
+        <span>Membership status</span>
+        <strong id="membershipStatusText">Active</strong>
+      </div>
+
+      <div class="info-row">
+        <span>Account type</span>
+        <strong id="accountType">Member</strong>
+      </div>
+
+      <div class="info-row">
+        <span>Membership reference</span>
+        <strong id="membershipReference">—</strong>
+      </div>
+
+    </section>
+
+    <section class="info-card">
+      <h2>Member Benefits</h2>
+
+      <div class="benefit">
+        <div class="benefit-mark">✓</div>
+        <div>Access to the Liberty members portal and party updates.</div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-mark">✓</div>
+        <div>Access to available party resources and policy information.</div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-mark">✓</div>
+        <div>Opportunities to participate in party events and activities.</div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-mark">✓</div>
+        <div>Stay informed about Liberty's campaigns and announcements.</div>
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+<footer>
+  <div>© 2026 Liberty. All rights reserved.</div>
+
+  <div>
+    <a href="privacy.html">Privacy</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html">Home</a>
+  </div>
+</footer>
+
+<script>
+  // Check for an existing login session
+  const memberSession = sessionStorage.getItem("libertyMember");
+
+  if (!memberSession) {
+    window.location.href = "members.html";
+  } else {
+    try {
+      const member = JSON.parse(memberSession);
+
+      const status = member.membershipStatus || "Active";
+      const role = member.role || "Member";
+
+      // Display member details
+      document.getElementById("memberName").textContent =
+        "Welcome, " + (member.name || "Member");
+
+      document.getElementById("memberFullName").textContent =
+        member.name || "Not provided";
+
+      document.getElementById("memberEmail").textContent =
+        member.email || "Not provided";
+
+      document.getElementById("memberId").textContent =
+        member.memberId || member.id || "Not assigned";
+
+      document.getElementById("membershipReference").textContent =
+        member.memberId || member.id || "Not assigned";
+
+      document.getElementById("memberRole").textContent = role;
+
+      document.getElementById("accountType").textContent = role;
+
+      document.getElementById("membershipStatus").textContent = status;
+
+      document.getElementById("membershipStatusText").textContent = status;
+
+      document.getElementById("memberStanding").textContent =
+        status === "Active" ? "Good Standing" : "Please contact Liberty";
+
+      if (status !== "Active") {
+        document.getElementById("membershipStatus").classList.add("inactive");
+      }
+
+      // Retrieve approved membership information if available
+      const approvedMembers = JSON.parse(
+        localStorage.getItem("libertyApprovedMembers") || "[]"
+      );
+
+      const approvedRecord = approvedMembers.find(
+        item => item.email &&
+          member.email &&
+          item.email.toLowerCase() === member.email.toLowerCase()
+      );
+
+      if (approvedRecord) {
+        document.getElementById("membershipType").textContent =
+          approvedRecord.membershipType || "Standard Member";
+
+        document.getElementById("memberId").textContent =
+          approvedRecord.id || member.id || "Not assigned";
+
+        document.getElementById("membershipReference").textContent =
+          approvedRecord.id || member.id || "Not assigned";
+      }
+
+    } catch (error) {
+      console.error("Membership profile error:", error);
+      sessionStorage.removeItem("libertyMember");
+      window.location.href = "members.html";
+    }
+  }
+</script>
+
+</body>
+</html>
