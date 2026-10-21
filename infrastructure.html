@@ -1,0 +1,1090 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Infrastructure | Liberty</title>
+
+<style>
+:root {
+    --lime: #b8ff00;
+    --lime-dark: #8fca00;
+    --black: #080808;
+    --dark: #151515;
+    --light: #f5f6f3;
+    --grey: #707070;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* TOP BAR */
+
+.topbar {
+    background: var(--black);
+    color: var(--white);
+    padding: 9px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.topbar strong {
+    color: var(--lime);
+}
+
+/* NAVIGATION */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--white);
+    border-bottom: 1px solid #e5e5e5;
+    padding: 17px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo-box {
+    width: 36px;
+    height: 36px;
+    background: var(--lime);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 900;
+    color: var(--black);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.nav-links a {
+    transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--lime-dark);
+}
+
+.nav-button {
+    background: var(--lime);
+    color: var(--black);
+    padding: 11px 19px;
+    font-weight: 800;
+    transition: 0.2s;
+}
+
+.nav-button:hover {
+    background: var(--lime-dark);
+}
+
+/* HERO */
+
+.hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 100px 7% 105px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "INFRASTRUCTURE";
+    position: absolute;
+    right: -35px;
+    bottom: -25px;
+    font-size: clamp(65px, 12vw, 170px);
+    font-weight: 900;
+    color: rgba(255,255,255,0.035);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 850px;
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    color: var(--lime);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(43px, 7vw, 76px);
+    line-height: 1.04;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: var(--lime);
+}
+
+.hero p {
+    color: #cccccc;
+    font-size: 18px;
+    max-width: 670px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.button-primary {
+    background: var(--lime);
+    color: var(--black);
+    padding: 15px 25px;
+    font-weight: 800;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.button-primary:hover {
+    background: var(--lime-dark);
+    transform: translateY(-2px);
+}
+
+.button-outline {
+    border: 1px solid #777;
+    color: var(--white);
+    padding: 14px 25px;
+    font-weight: 700;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.button-outline:hover {
+    border-color: var(--lime);
+    color: var(--lime);
+}
+
+/* GENERAL SECTIONS */
+
+section {
+    padding: 85px 7%;
+}
+
+.section-label {
+    color: var(--lime-dark);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.section-heading {
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.15;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.section-description {
+    color: var(--grey);
+    font-size: 16px;
+    max-width: 750px;
+    line-height: 1.8;
+}
+
+/* INTRO */
+
+.intro {
+    background: var(--white);
+}
+
+.intro-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 65px;
+    align-items: center;
+}
+
+.intro-text p {
+    color: #555;
+    margin-top: 17px;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.intro-highlight {
+    background: var(--light);
+    padding: 35px;
+    border-left: 5px solid var(--lime);
+}
+
+.intro-highlight h3 {
+    font-size: 21px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.intro-highlight p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* PRIORITIES */
+
+.policy-section {
+    background: var(--light);
+}
+
+.policy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 45px;
+}
+
+.policy-card {
+    background: var(--white);
+    padding: 32px;
+    border-bottom: 4px solid transparent;
+    transition: 0.25s;
+}
+
+.policy-card:hover {
+    transform: translateY(-5px);
+    border-bottom-color: var(--lime);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+}
+
+.card-number {
+    color: var(--lime-dark);
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.policy-card h3 {
+    font-size: 21px;
+    font-weight: 900;
+    margin-bottom: 13px;
+}
+
+.policy-card p {
+    color: var(--grey);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* FEATURED PROGRAMME */
+
+.featured {
+    background: var(--black);
+    color: var(--white);
+}
+
+.featured-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 65px;
+    align-items: center;
+}
+
+.featured .section-heading {
+    color: var(--white);
+}
+
+.featured-description {
+    color: #c4c4c4;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+.featured-list {
+    list-style: none;
+    margin-top: 25px;
+}
+
+.featured-list li {
+    padding: 13px 0;
+    border-bottom: 1px solid #333;
+    color: #ddd;
+    font-size: 15px;
+}
+
+.featured-list li::before {
+    content: "✓";
+    color: var(--lime);
+    font-weight: 900;
+    margin-right: 12px;
+}
+
+.featured-box {
+    background: #191919;
+    border: 1px solid #333;
+    padding: 40px;
+    position: relative;
+}
+
+.featured-box::before {
+    content: "";
+    display: block;
+    width: 55px;
+    height: 5px;
+    background: var(--lime);
+    margin-bottom: 25px;
+}
+
+.featured-box h3 {
+    font-size: 27px;
+    line-height: 1.25;
+    margin-bottom: 18px;
+}
+
+.featured-box p {
+    color: #bdbdbd;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.featured-tag {
+    display: inline-block;
+    margin-top: 25px;
+    color: var(--lime);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* DETAILED POLICY */
+
+.details {
+    background: var(--white);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 45px;
+}
+
+.detail-card {
+    border: 1px solid #e7e7e7;
+    padding: 32px;
+    background: var(--white);
+}
+
+.detail-card h3 {
+    font-size: 21px;
+    margin-bottom: 17px;
+    font-weight: 900;
+}
+
+.detail-card p {
+    color: var(--grey);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.detail-card ul {
+    list-style: none;
+}
+
+.detail-card li {
+    color: #444;
+    font-size: 14px;
+    padding: 9px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.detail-card li::before {
+    content: "—";
+    color: var(--lime-dark);
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+/* COMMITMENT */
+
+.commitment {
+    background: var(--light);
+}
+
+.commitment-inner {
+    max-width: 850px;
+}
+
+.commitment-inner p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.9;
+    margin-top: 17px;
+}
+
+/* CTA */
+
+.cta {
+    background: var(--lime);
+    padding: 70px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.cta h2 {
+    font-size: clamp(27px, 4vw, 40px);
+    font-weight: 900;
+    line-height: 1.2;
+    max-width: 650px;
+}
+
+.cta p {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #333;
+}
+
+.cta-button {
+    background: var(--black);
+    color: var(--white);
+    padding: 16px 25px;
+    font-weight: 800;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.cta-button:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* FOOTER */
+
+footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 65px 7% 25px;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 45px;
+    padding-bottom: 45px;
+    border-bottom: 1px solid #333;
+}
+
+.footer-brand p {
+    color: #999;
+    font-size: 14px;
+    margin-top: 18px;
+    max-width: 270px;
+    line-height: 1.8;
+}
+
+.footer-column h4 {
+    color: var(--lime);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.footer-column a {
+    display: block;
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 12px;
+    transition: 0.2s;
+}
+
+.footer-column a:hover {
+    color: var(--lime);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 25px;
+    color: #777;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .nav-links {
+        gap: 14px;
+        font-size: 11px;
+    }
+
+    .intro-layout,
+    .featured-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .policy-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-top {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .topbar {
+        padding: 9px 5%;
+        font-size: 10px;
+    }
+
+    nav {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        gap: 20px;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    section {
+        padding: 65px 5%;
+    }
+
+    .hero {
+        padding: 75px 5%;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .policy-grid,
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta {
+        padding: 55px 5%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div>THE LIBERTY PARTY OF SQUARE COUNTRY</div>
+    <div><strong>OPPORTUNITY STARTS HERE</strong></div>
+</div>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="index.html" class="logo">
+        <div class="logo-box">L</div>
+        <span>LIBERTY</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="our-plan.html" class="active">Our Plan</a>
+        <a href="about.html">About</a>
+        <a href="leadership.html">Leadership</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <a href="join.html" class="nav-button">JOIN LIBERTY</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">OUR PLAN • INFRASTRUCTURE</div>
+
+        <h1>Building the<br><span>Infrastructure</span><br>of Tomorrow.</h1>
+
+        <p>
+            Connecting communities, supporting businesses and preparing
+            Square Country for the future. Liberty will deliver the
+            infrastructure our growing nation needs.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#priorities" class="button-primary">Explore Our Plan</a>
+            <a href="#northern-prosperity" class="button-outline">Northern Prosperity Plan</a>
+        </div>
+    </div>
+</header>
+
+<!-- INTRODUCTION -->
+<section class="intro">
+    <div class="intro-layout">
+
+        <div class="intro-text">
+            <div class="section-label">A COUNTRY BUILT FOR THE FUTURE</div>
+
+            <h2 class="section-heading">
+                Infrastructure is the foundation of economic opportunity.
+            </h2>
+
+            <p>
+                A strong economy depends on reliable infrastructure.
+                Roads, electricity networks, water systems and modern
+                transport connections allow businesses to grow, families
+                to thrive and communities to prosper.
+            </p>
+
+            <p>
+                Liberty believes Square Country must invest in the
+                infrastructure required for future generations.
+                We will prioritise projects that improve productivity,
+                strengthen regional communities and deliver lasting
+                benefits for taxpayers.
+            </p>
+        </div>
+
+        <div class="intro-highlight">
+            <h3>Our Infrastructure Mission</h3>
+            <p>
+                Build a more connected, productive and resilient Square
+                Country through responsible investment, efficient project
+                delivery and stronger partnerships with the private sector.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- PRIORITIES -->
+<section class="policy-section" id="priorities">
+
+    <div class="section-label">OUR PRIORITIES</div>
+
+    <h2 class="section-heading">The infrastructure Square Country needs.</h2>
+
+    <p class="section-description">
+        Liberty's infrastructure programme will focus on six key areas
+        to improve national productivity, strengthen communities and
+        support long-term economic growth.
+    </p>
+
+    <div class="policy-grid">
+
+        <div class="policy-card">
+            <div class="card-number">01 / TRANSPORT</div>
+            <h3>Better Roads & Transport</h3>
+            <p>
+                Upgrade national highways, improve regional connections
+                and address congestion to make travelling and transporting
+                goods easier and more reliable.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <div class="card-number">02 / ENERGY</div>
+            <h3>Reliable Energy</h3>
+            <p>
+                Strengthen electricity networks, encourage new generation
+                investment and modernise the national grid to support
+                growing energy demand.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <div class="card-number">03 / WATER</div>
+            <h3>Water Security</h3>
+            <p>
+                Improve water storage, treatment and distribution
+                infrastructure to support households, agriculture
+                and industry.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <div class="card-number">04 / REGIONS</div>
+            <h3>Regional Development</h3>
+            <p>
+                Invest in provincial infrastructure that connects
+                regional communities with jobs, markets, services
+                and economic opportunities.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <div class="card-number">05 / INVESTMENT</div>
+            <h3>Private Sector Partnerships</h3>
+            <p>
+                Encourage responsible private investment and public-private
+                partnerships to expand infrastructure delivery and
+                improve project efficiency.
+            </p>
+        </div>
+
+        <div class="policy-card">
+            <div class="card-number">06 / DELIVERY</div>
+            <h3>Faster Project Delivery</h3>
+            <p>
+                Reduce unnecessary delays, improve planning and strengthen
+                accountability to ensure infrastructure projects deliver
+                value for taxpayers.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- NORTHERN PROSPERITY PLAN -->
+<section class="featured" id="northern-prosperity">
+
+    <div class="featured-layout">
+
+        <div>
+            <div class="section-label">A FLAGSHIP INFRASTRUCTURE INITIATIVE</div>
+
+            <h2 class="section-heading">
+                The Northern Prosperity Plan.
+            </h2>
+
+            <p class="featured-description">
+                The Northern Prosperity Plan is a major commitment to
+                improving infrastructure and unlocking economic
+                opportunities across northern Square Country.
+            </p>
+
+            <p class="featured-description">
+                Backed by funding appropriated in the June 2026 Think Big
+                Budget, the plan will support strategic infrastructure
+                investment and strengthen the foundations of regional growth.
+            </p>
+
+            <ul class="featured-list">
+                <li>Improve regional infrastructure and connectivity.</li>
+                <li>Strengthen water security and essential networks.</li>
+                <li>Support businesses, agriculture and industry.</li>
+                <li>Unlock new opportunities for northern communities.</li>
+                <li>Encourage long-term private sector investment.</li>
+            </ul>
+        </div>
+
+        <div class="featured-box">
+            <h3>Unlocking the potential of the North.</h3>
+
+            <p>
+                Northern Square Country has significant opportunities
+                for economic development. Realising that potential
+                requires reliable infrastructure, better connections
+                and long-term investment.
+            </p>
+
+            <p style="margin-top:18px;">
+                Liberty will ensure that the funding allocated through
+                the Think Big Budget is directed towards the delivery
+                of the Northern Prosperity Plan and its objectives.
+            </p>
+
+            <div class="featured-tag">NORTHERN PROSPERITY • 2026</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- DETAILED POLICIES -->
+<section class="details">
+
+    <div class="section-label">DELIVERING RESULTS</div>
+
+    <h2 class="section-heading">How we will get it done.</h2>
+
+    <p class="section-description">
+        Our approach is focused on practical investment, responsible
+        spending and getting important projects completed.
+    </p>
+
+    <div class="details-grid">
+
+        <div class="detail-card">
+            <h3>Modern Transport Networks</h3>
+            <p>
+                A modern transport network is essential to a productive
+                economy. Liberty will focus on improving the quality,
+                capacity and reliability of national transport infrastructure.
+            </p>
+
+            <ul>
+                <li>Upgrade important national highways.</li>
+                <li>Improve freight and logistics corridors.</li>
+                <li>Address major urban traffic bottlenecks.</li>
+                <li>Improve regional road connections.</li>
+                <li>Prioritise safety improvements.</li>
+            </ul>
+        </div>
+
+        <div class="detail-card">
+            <h3>Energy for Economic Growth</h3>
+            <p>
+                Businesses and households need dependable electricity.
+                We will support a stronger energy system capable of
+                meeting the demands of a growing economy.
+            </p>
+
+            <ul>
+                <li>Encourage investment in electricity generation.</li>
+                <li>Modernise national transmission infrastructure.</li>
+                <li>Improve grid resilience and reliability.</li>
+                <li>Support private sector energy investment.</li>
+                <li>Plan for future electricity demand.</li>
+            </ul>
+        </div>
+
+        <div class="detail-card">
+            <h3>Water Infrastructure & Security</h3>
+            <p>
+                Reliable water infrastructure supports communities,
+                agriculture and industry. We will encourage sustainable
+                investment in essential water networks.
+            </p>
+
+            <ul>
+                <li>Improve water storage capacity.</li>
+                <li>Modernise treatment and distribution systems.</li>
+                <li>Upgrade ageing infrastructure.</li>
+                <li>Support regional water security.</li>
+                <li>Maintain environmental safeguards.</li>
+            </ul>
+        </div>
+
+        <div class="detail-card">
+            <h3>Regional Infrastructure Investment</h3>
+            <p>
+                Every part of Square Country should have the opportunity
+                to benefit from economic growth. Regional infrastructure
+                will be an important part of our national development plan.
+            </p>
+
+            <ul>
+                <li>Support high-value regional projects.</li>
+                <li>Improve access to employment and services.</li>
+                <li>Strengthen connections to regional industries.</li>
+                <li>Work with local authorities and businesses.</li>
+                <li>Support sustainable regional development.</li>
+            </ul>
+        </div>
+
+        <div class="detail-card">
+            <h3>Private Investment & Partnerships</h3>
+            <p>
+                Government cannot and should not be the only source of
+                infrastructure investment. Liberty will encourage
+                private sector participation where it delivers value.
+            </p>
+
+            <ul>
+                <li>Encourage competitive infrastructure investment.</li>
+                <li>Explore suitable public-private partnerships.</li>
+                <li>Reduce unnecessary investment barriers.</li>
+                <li>Improve procurement processes.</li>
+                <li>Maintain appropriate public accountability.</li>
+            </ul>
+        </div>
+
+        <div class="detail-card">
+            <h3>Responsible Project Management</h3>
+            <p>
+                Infrastructure investment must be carefully planned,
+                transparently managed and delivered efficiently.
+                Taxpayers deserve confidence that public money is
+                being spent responsibly.
+            </p>
+
+            <ul>
+                <li>Require clear project business cases.</li>
+                <li>Improve cost-benefit assessments.</li>
+                <li>Monitor project timelines and expenditure.</li>
+                <li>Publish progress updates on major projects.</li>
+                <li>Address unnecessary delays and cost overruns.</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- FUNDING AND RESPONSIBILITY -->
+<section class="commitment">
+
+    <div class="commitment-inner">
+        <div class="section-label">RESPONSIBLE INVESTMENT</div>
+
+        <h2 class="section-heading">
+            Building responsibly. Investing for the long term.
+        </h2>
+
+        <p>
+            Liberty believes that infrastructure investment must be
+            ambitious, but it must also be financially responsible.
+            Government should prioritise projects that deliver measurable
+            economic benefits and improve the lives of Square Country's
+            people.
+        </p>
+
+        <p>
+            We will make effective use of existing appropriations,
+            including funding provided through the June 2026 Think Big
+            Budget for the Northern Prosperity Plan. We will also
+            encourage private investment where it can deliver better
+            outcomes and value for taxpayers.
+        </p>
+
+        <p>
+            Major projects must be supported by sound planning,
+            transparent procurement and appropriate financial oversight.
+            We will focus on delivering infrastructure that Square
+            Country can afford to build, operate and maintain.
+        </p>
+    </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+    <div>
+        <h2>Opportunity Starts Here.</h2>
+        <p>Explore Liberty's plan to build a stronger, more prosperous Square Country.</p>
+    </div>
+
+    <a href="our-plan.html" class="cta-button">EXPLORE OUR PLAN →</a>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-top">
+
+        <div class="footer-brand">
+            <a href="index.html" class="logo">
+                <div class="logo-box">L</div>
+                <span>LIBERTY</span>
+            </a>
+
+            <p>
+                Building a stronger, more prosperous Square Country.
+                Opportunity Starts Here.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h4>Explore</h4>
+            <a href="index.html">Home</a>
+            <a href="our-plan.html">Our Plan</a>
+            <a href="about.html">About Liberty</a>
+            <a href="leadership.html">Leadership</a>
+        </div>
+
+        <div class="footer-column">
+            <h4>Our Policies</h4>
+            <a href="our-plan.html">Growing the Economy</a>
+            <a href="infrastructure.html">Building Infrastructure</a>
+            <a href="our-plan.html">Our Plan</a>
+        </div>
+
+        <div class="footer-column">
+            <h4>Get Involved</h4>
+            <a href="join.html">Become a Member</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="members.html">Member Login</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <div>© 2026 Liberty Party of Square Country.</div>
+        <div>OPPORTUNITY STARTS HERE.</div>
+    </div>
+
+</footer>
+
+</body>
+</html>
